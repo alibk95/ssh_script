@@ -11,22 +11,22 @@ public="id_rsa.pub"
 if [ -f ~/.ssh/$private -a ~/.ssh/$public ]; then
 	if [ "$(ls -A ~/.ssh/work)" ]; then
 		if [ "$(ls -A ~/.ssh/personal)" ]; then
-			echo "full. fucked"
-
+			echo "It seems that you might have more than two set of keys!"
 		else 
 			mv ~/.ssh/$private ~/.ssh/personal/
 			mv ~/.ssh/$public ~/.ssh/personal/
 
 			mv ~/.ssh/work/$private ~/.ssh
 			mv ~/.ssh/work/$public ~/.ssh
+			echo "Working on work repository"
 		fi
 	else 
-		echo "empty"
 		mv ~/.ssh/$private ~/.ssh/work/
 		mv ~/.ssh/$public ~/.ssh/work/
 
 		mv ~/.ssh/personal/$private ~/.ssh
 		mv ~/.ssh/personal/$public ~/.ssh
+		echo "Working on personal repository"
 	fi
 else
 	get_user_val
@@ -35,9 +35,11 @@ else
     	if [ "$uservar" = "work" ]; then
     		mv ~/.ssh/work/$private ~/.ssh/
     		mv ~/.ssh/work/$public ~/.ssh/
+    		echo "Working on work repository"
     	else 
     		mv ~/.ssh/personal/$private ~/.ssh/
     		mv ~/.ssh/personal/$public ~/.ssh/
+    		echo "Working on personal repository"
     	fi
 	else 
 		echo "$uservar is not valid, please try again!"
