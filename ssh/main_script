@@ -1,12 +1,54 @@
 #!/bin/bash
-dir="$1"
- 
-[ $# -eq 0 ] && { echo "Usage: $0 dir-name"; exit 1; }
- 
-if [ -d "$dir" -a ! -h "$dir" ]
-then
-   echo "$dir found "
-   
+
+
+echo "Welcome! to $0 ssh switcher"
+
+function get_user_val() {
+	read -p 'work or personal project: ' uservar
+	echo $uservar
+}
+
+
+private="id_rsa"
+public="id_rsa.pub" 
+if [ -f ~/.ssh/$private -a ~/.ssh/$public ]; then
+	if [ "$(ls -A ~/.ssh/work)" ]; then
+		if [ "$(ls -A ~/.ssh/personal)" ]; then
+			echo "full. fucked"
+
+		else 
+			mv ~/.ssh/$private ~/.ssh/personal/
+			mv ~/.ssh/$public ~/.ssh/personal/
+
+			mv ~/.ssh/work/$private ~/.ssh
+			mv ~/.ssh/work/$public ~/.ssh
+		fi
+	else 
+		echo "empty"
+		mv ~/.ssh/$private ~/.ssh/work/
+		mv ~/.ssh/$public ~/.ssh/work/
+
+		mv ~/.ssh/personal/$private ~/.ssh
+		mv ~/.ssh/personal/$public ~/.ssh
+	fi
 else
-   echo "Error: $dir not found"
+	get_user_val
+	if [ "$uservar" = "work" -o "$uservar" = "personal" ]; then 
+    	echo "alright" 
+    	if [ "$uservar" = "work" ]; then
+    		mv ~/.ssh/work/$private ~/.ssh/
+    		mv ~/.ssh/work/$public ~/.ssh/
+    	else 
+    		mv ~/.ssh/personal/$private ~/.ssh/
+    		mv ~/.ssh/personal/$public ~/.ssh/
+    	fi
+	else 
+		echo "$uservar is not valid, please try again!"
+	fi
 fi
+
+
+
+
+
+
