@@ -1,13 +1,10 @@
 #!/bin/bash
-
-
 echo "Welcome! to $0 ssh switcher"
 
 function get_user_val() {
 	read -p 'work or personal project: ' uservar
 	echo $uservar
 }
-
 
 private="id_rsa"
 public="id_rsa.pub" 
