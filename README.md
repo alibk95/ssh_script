@@ -23,7 +23,9 @@ Run the script anywhere you prefer. Don't forget to change the permissions befor
 to make it much more easier I put the alias of the command in .bashrc file. 
 
 `nano ~/.bashrc`
+
 and add the following line to the end of the .bashrc file
+
 `# aliases`
 `alias swgit="bash ~/Desktop/git_switcher"`
 
