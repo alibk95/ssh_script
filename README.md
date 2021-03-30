@@ -31,3 +31,5 @@ and add the following line to the end of the .bashrc file
 `alias swgit="bash ~/Desktop/git_switcher"`
 
 so next time I just need to type the swgit in the CL. 
+
+🚀 🤘
